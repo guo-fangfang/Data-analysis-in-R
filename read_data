@@ -7,3 +7,9 @@ library(openxlsx)
 data_xlsx <-read.xlsx("D:/毕业论文/Data/five_factors.xlsx")
 #read the data in form of csv
 data_csv <-read.csv()
+#read data in clipboard
+data_clipboard<-read.table("clipboard",header=T)
+#read data in the form of spss
+install.packages("foreign")
+library(foreign)
+data_spss <-read.spss(file="",use.value.labels=T,to.data.frame=T)
