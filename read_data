@@ -1,0 +1,9 @@
+##########read data#############
+#read th data in form of txt
+data_txt <-read.table("",header=T)
+#read the data in form of the excel
+intall.packages("openxlsx")
+library(openxlsx)
+data_xlsx <-read.xlsx("D:/毕业论文/Data/five_factors.xlsx")
+#read the data in form of csv
+data_csv <-read.csv()
