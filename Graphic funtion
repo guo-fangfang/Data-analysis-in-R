@@ -1,0 +1,39 @@
+########### make some graphics byoneself############
+
+######using the data of puromycin and to graphy it #####
+dim (Puromycin)
+head(Puromycin)
+##########plot function###########
+##########plot function###########
+PuroA <- subset(Puromycin,state=="treated")##subset:extract data in some conditions
+#plot function
+plot(rate~conc,data = PuroA)#plot(y~x,data)
+#or using these methods
+with(PuroA,plot(conc,rate))#with(data,plot(x,y))
+plot(PuroA$rate,PuroA$conc)
+########beauty simple plot############
+u<-1:25
+plot(u~1,pch=u,col=u,cex=3)##whatch color and pch
+###choose pch and color
+plot(rate~conc,data=PuroA,pch=2,col=4,cex=1)
+###set anxis and title
+plot(rate~conc ,data=PuroA,pch=2,col=4,cex=1,xlim=c(0,1.2),ylim=c(40,210),
+ylab="rate",xlab="conc",cex.lab=2)
+title(main = "Puromycin",cex.main=3)
+### add lines
+install.packages("doBy")
+library(doBy)
+PuroA.mean <-summaryBy(rate~conc,data=PuroA,FUN=mean)##computer mean of rate at per conc
+plot(rate~conc,data=PuroA,pch=16,col=4,cex=1.5)
+points(rate.mean~conc,data=PuroA.mean,col="cyan",lwd=10.pch="X")#add points
+lines(rate.mean~conc,data=PuroA.mean,col="green")#add lines
+
+
+
+
+
+
+
+
+###########make aome graphics by ggplot##############
+
