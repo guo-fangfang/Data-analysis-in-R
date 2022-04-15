@@ -27,6 +27,27 @@ PuroA.mean <-summaryBy(rate~conc,data=PuroA,FUN=mean)##computer mean of rate at 
 plot(rate~conc,data=PuroA,pch=16,col=4,cex=1.5)
 points(rate.mean~conc,data=PuroA.mean,col="cyan",lwd=10.pch="X")#add points
 lines(rate.mean~conc,data=PuroA.mean,col="green")#add lines
+##add local fit lines
+plot (rate~conc,data=PuroA)
+smooth1<-with(PuroA,lowess(rate~conc,f=0.9)) ##f:the rate of smooth,more small more fitter
+smooth2<-with(PuroA,lowess(rate~conc,f=0.3))
+lines(smooth1,col="red")
+lines(smooth2,col="blue")
+##add fit lines    ,only be used in independence variase
+plot (rate~conc,data=PuroA)
+m1 <-lm(rate~conc,data=PuroA)
+m2 <-lm(rate~conc+I(conc^2),data=PuroA)
+m3 <-lm(rate~conc+I(conc^2)+I(conc^3),data=PuroA)
+lines(fitted(m1)~conc,data=PuroA,col="red")
+lines(fitted(m2)~conc,data=PuroA,col='blue')
+lines(fitted(m3)~conc,data=PuroA,col="green")
+##add reference lines
+plot (rate~conc ,data = PuroA)
+abline(lm(rate~conc,data=PuroA),col="red")#add fit line
+abline(a=100,b=105,col="yellow")#add staight line ,a:intercept,b:slop
+abline(h=200,col="blue")#add horizon line
+abline(v=0.6,col="green")#add vertical line
+
 
 
 
