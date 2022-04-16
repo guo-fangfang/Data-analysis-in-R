@@ -1,6 +1,7 @@
 ##########sampling#############
 #same probability no return (used in big data),sample(data,n)
 sample(1:100,4)
+sample(rnorm(50),10)
 #same probability and return,sample(x,n,replace=TRUE)
 sample(1:6,10,replace=T)
 #different probability,sample(s,n,replace=T,prob=y)
