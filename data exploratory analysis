@@ -1,0 +1,58 @@
+###some distribution###
+#binom,二项分布
+n<-20
+p<-0.2
+k<-seq(0,n)
+plot(k,dbinom(k,n,p),type="h",main="Binomial distribution,n=20,p=0.2")
+#pois,泊松分布
+lambda<-4.0
+k<-seq(0,20)
+plot(k,dpois(k,lambda),type="h",main="Possion distribution")
+#geom,几何分布
+p<-0.5
+k<-seq(0,10)
+plot(k,dgeom(k,p),type="h",main="Geometric distribution")
+#hyper,超几何分布
+N<-30
+M<-10
+n<-10
+k<-seq(0,10)
+plot(k,dhyper(k,N,M,n),type="h",main="Hypergeometric distribution")
+#nbinom,负二项分布
+n<-10
+p<-0.5
+k<-seq(0,40)
+plot(k,dnbinom(k,n,p),type="h")
+#dnorm，正太分布密度函数
+#dt,t分布
+#dchisq，卡方分布
+#df，f分布
+#dlnorm，对数正态密度
+###直方图hist&density function###
+N<-100000
+n<-100
+p<-0.9
+x<-rbinom(N,n,p)
+hist(x,xlim=c(min(x),max(x)),probability=T,nclass=max(x)-min(x)+1,col="lightblue",
+main="Binominal distribution")
+lines(density(x,bw=1),col="red",lwd=3)
+#### one growp data exploration###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
