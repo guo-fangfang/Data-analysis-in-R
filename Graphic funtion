@@ -47,13 +47,55 @@ abline(lm(rate~conc,data=PuroA),col="red")#add fit line
 abline(a=100,b=105,col="yellow")#add staight line ,a:intercept,b:slop
 abline(h=200,col="blue")#add horizon line
 abline(v=0.6,col="green")#add vertical line
-
-
-
-
-
-
-
+###multiple graphs in one graph
+#method1 make two graphs by state#
+mysymb <-c(1,2)[Puromycin$state]## using the category of state to make the 1,2
+plot(rate~conc,data=Puromycin,col=mysymb,pch=mysymb)
+PuroB<-subset(Puromycin,state=="untreated")
+#library(locfit)
+#smoothA <-locfit(rate~lp(conc,nn=1,deg=1),data=PuroA)
+#smoothB <-locfit(rate~lp(conc,nn=1,deg=1),data=PuroB)
+smoothA <-with(PuroA,lowess(rate~conc,f=0.9))
+smoothB <-with(PuroB,lowess(rate~conc,f=0.3))
+plot(rate ~conc,data=Puromycin,col=mysymb,pch=mysymb)
+#or plot(rate~conc,data=Puromycin,col=c(1,2)[state],pch=c(1,2)[state])
+lines(smoothA,lty =1,col=1)
+lines(smoothB,lty =3,col=2)
+#legend(x=0.6,y=100,legend = c("treated","untreated"),col=c(1,2),pch=c(1,2),lty=c(1,3))
+legend("topright",legend = c("treated","untreated"),col=c(1,2),pch=c(1,2),lty=c(1,3))
+#methods2 make  different data to one graph#
+# if one x two diferent y ,use matplot
+#if else use plotrix
+install.packages("plotrix")
+library(plotrix)
+twoord.plot(PuroA$conc,PuroA$rate,PuroB$conc,PuroB$rate,type=c("p","p"))
+###multiple graphs in multiple graph at the same time
+#use par() :same size windoes
+windows(width = 7,height = 3.5)
+par(mfrow = c(1,2))
+plot(rate~conc,data=PuroA)
+title("state = treated")
+plot(rate~conc,data=PuroB)
+title("state=untreated")
+dev.off()#close the windows
+#use layout(matrix(1:m*n,m,n)):different sizes
+#such as 
+x<- pmin(3,pmax(-3,stats::rnorm(50)))# use the function of rnorm in the packages of ststs
+y<- pmin(3,pmax(-3,stats::rnorm(50)))
+xhist<-hist(x,breaks=seq(-3,3,0.5),plot=FALSE)#得到频率分布表
+yhist<-hist(y,breaks=seq(-3,3,0.5),plot=FALSE)
+top <- max(c(xhist$counts,yhist$counts))
+xrange<-c(-3,3)
+yrange<-c(-3,3)
+layout(matrix(c(2,0,1,3),2,2,byrow=T),c(3,1),c(1,3),T)
+layout.show(3)
+par(mar=c(3,3,1,1))#边界空行数
+plot (x,y,xlim=xrange,ylim=yrange)
+par(mar=c(0,3,1,1))
+#barplot(xhist$counts,axes=F,ylim=c(0,top),space=0)
+par(mar=c(3,0,1,1))
+#barplot(yhist$counts,axes=F,xlim=c(0,top),space=0,horiz=T)
+dev.off()
 
 
 ###########make aome graphics by ggplot##############
