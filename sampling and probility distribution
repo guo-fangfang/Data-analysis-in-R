@@ -1,1 +1,8 @@
+##########sampling#############
+#same probability no return (used in big data),sample(data,n)
+sample(1:100,4)
+#same probability and return,sample(x,n,replace=TRUE)
+sample(1:6,10,replace=T)
+#different probability,sample(s,n,replace=T,prob=y)
+sample(c(1,0),10,replace=T,prob=c(0.9,0.1))
 
